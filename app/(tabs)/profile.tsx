@@ -1,10 +1,10 @@
 import { View, Text, SafeAreaView } from 'react-native'
 import React from 'react'
 
-export default function about() {
+export default function Profile() {
   return (
     <View>
-      <Text>about</Text>
+      <Text>Profile</Text>
     </View>
   )
 }

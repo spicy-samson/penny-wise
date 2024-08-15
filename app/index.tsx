@@ -1,31 +1,39 @@
-import { Text, View, StyleSheet, useColorScheme} from "react-native";
-import { HelloWave } from "@/components/HelloWave";
-import { Link } from "expo-router";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import React from 'react';
+import { SafeAreaView, ScrollView, View, Image, StyleSheet, Text} from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import images from '@/constants/images'; // Adjust the import as needed
+import CustomButton from '@/components/CustomButton';
+import { StatusBar } from 'expo-status-bar';
+import { router } from 'expo-router';
 
-export default function Index() {
-  const isDarkMode = useColorScheme() === 'dark';
-  const backgroundStyle = "bg-neutral-300 dark:bg-slate-900";
-
+export default function App() {
   return (
-    <View style={{backgroundColor: isDarkMode ? Colors.black : Colors.white,flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',}}>
-      <Text style={[styles.textStyle,{color: isDarkMode? Colors.white : Colors.black}]}>Hello!<HelloWave/></Text>
-      <Link href={'/(tabs)/about'} asChild>
-        <Text style={{color: isDarkMode? Colors.white : Colors.black}}>Go to our about page.</Text> 
-      </Link>
-    </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaView className="bg-orange-100 h-full">
+        <ScrollView contentContainerStyle={{height: '100%'}}>
+          <View className="w-full justify-center items-center h-full">
+            <Image source={images.openingImage} className='w-[280px] h-[250px] mb-5' resizeMode='contain'/>
+            <View className='relative'>
+              <Text className = 'font-psemibold text-lg text-center pl-2 pr-2'> Be wise, even with your smallest pennies.</Text> 
+            </View>
+            
+            <CustomButton 
+              title="Continue with Email"
+              handlePress={() => router.push('/sign-in')}
+              containerStyles="mt-10 w-full"
+            />
+
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+      <StatusBar backgroundColor='#000000' style='dark' /> 
+    </GestureHandlerRootView>
   );
 }
 
 const styles = StyleSheet.create({
-  container : {
+  container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
-  textStyle: {
-    fontSize: 35,
-  }
-})
+
+});
